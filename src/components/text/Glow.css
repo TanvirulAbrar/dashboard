@@ -1,0 +1,60 @@
+/* ===== Glow Section ===== */
+.glow-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: #0b0f19; /* optional, can remove */
+}
+
+.glow-section .glow-card {
+  position: relative;
+  width: 320px;
+  height: 200px;
+  border-radius: 16px;
+  padding: 2px; /* border thickness */
+  overflow: hidden;
+}
+
+/* Rotating gradient border */
+.glow-section .glow-card::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(#00ffb7, #01815c, #003320, #00ff91);
+  animation: glow-rotate 4s linear infinite;
+  z-index: 0;
+}
+
+/* Blur glow for soft effect */
+.glow-section .glow-card::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(#00ffb7, #01815c, #003320, #00ff91);
+  filter: blur(25px);
+  opacity: 0.6;
+  animation: glow-rotate 4s linear infinite;
+  z-index: 0;
+}
+
+/* Inner content */
+.glow-section .glow-card .content {
+  position: relative;
+  background: #111827;
+  border-radius: 14px;
+  height: 100%;
+  padding: 20px;
+  color: white;
+  z-index: 1;
+}
+
+/* Keyframes for rotation */
+@keyframes glow-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

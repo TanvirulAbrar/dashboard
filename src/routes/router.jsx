@@ -1,23 +1,28 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import DashboardPage from "../pages/DashboardPage";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: DashboardPage,
+    Component: LoginPage,
   },
   {
     path: "/login",
     Component: LoginPage,
   },
   {
-    path: "/signup", 
+    path: "/signup",
     Component: SignupPage,
   },
   {
     path: "/dashboard",
-    Component: DashboardPage,
+    element: (
+      <PrivateRoute>
+        <DashboardPage />
+      </PrivateRoute>
+    ),
   },
 ]);

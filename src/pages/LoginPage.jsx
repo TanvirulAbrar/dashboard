@@ -5,8 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 // import Glow from "../components/text/Glow";
-
-export default function LoginPage() {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -275,7 +274,6 @@ export default function LoginPage() {
                 </motion.button>
               </motion.form>
 
-              {/* Divider */}
               <motion.div className="relative my-8" variants={itemVariants}>
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-slate-200 dark:border-slate-800"></div>
@@ -347,4 +345,5 @@ export default function LoginPage() {
       </div>
     </motion.div>
   );
-}
+};
+export default LoginPage;
