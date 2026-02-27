@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaCheck } from 'react-icons/fa';
 
 export default function SignupPage() {
   const [fullName, setFullName] = useState('');
@@ -17,17 +18,31 @@ export default function SignupPage() {
     <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
       <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
         <div className="layout-container flex h-full grow flex-col">
-         
+          
+          <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 md:px-10 py-3 bg-white dark:bg-background-dark">
+            <div className="flex items-center gap-4">
+              <div className="size-6 text-primary flex items-center justify-center">
+                <FaCheck className="text-3xl" />
+              </div>
+              <h2 className="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Donezo</h2>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="text-sm text-slate-600 dark:text-slate-400 hidden sm:inline">Already have an account?</span>
+              <Link to="/login" className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                <span className="truncate">Log In</span>
+              </Link>
+            </div>
+          </header>
 
           <main className="flex flex-1 items-center justify-center px-4 py-12">
             <div className="layout-content-container flex flex-col w-full max-w-[480px] bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
-              {/* Header  */}
+             
               <div className="mb-8">
                 <div className="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden rounded-xl min-h-[160px] bg-primary/10" style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAboZhqFtuFUctgGDD2hekQq0Z4rljJi5T9Yj1PEW1dCxnC2Clyplg_IxeewcU73iwn3Mo6efW8AoiMOthJ0gW4h86rkWnLIIKpVlkZr1iFw29WKjsShhp05RZ46VVBDNB8-BRh9BrdL4dwuESwUwRJgrY9fMPqeifU5umlTcyU6MQrVl02DcfJxJnuRtwAuHlVaVr659X9mHdW2wkD6pHfHvmAPaCkDDRH23cGlMp0mnloOLOB6RmswF_vPDRteg0PgBc7JzOhT0c")'}}>
                 </div>
               </div>
 
-              
+             
               <div className="flex flex-col gap-2 mb-8">
                 <h1 className="text-slate-900 dark:text-white text-3xl font-black leading-tight tracking-[-0.033em]">Create your account</h1>
                 <p className="text-slate-600 dark:text-slate-400 text-base font-normal leading-normal">Join thousands of teams managing projects with ease.</p>
@@ -38,7 +53,7 @@ export default function SignupPage() {
                 <div className="flex flex-col gap-2">
                   <label className="text-slate-900 dark:text-white text-sm font-semibold leading-normal">Full Name</label>
                   <div className="relative">
-                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">person</span>
+                    <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl" />
                     <input 
                       className="form-input flex w-full rounded-xl text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 h-14 pl-12 pr-4 placeholder:text-slate-400 dark:placeholder:text-slate-500 text-base font-normal" 
                       placeholder="Enter your full name" 
@@ -52,7 +67,7 @@ export default function SignupPage() {
                 <div className="flex flex-col gap-2">
                   <label className="text-slate-900 dark:text-white text-sm font-semibold leading-normal">Email Address</label>
                   <div className="relative">
-                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">mail</span>
+                    <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl" />
                     <input 
                       className="form-input flex w-full rounded-xl text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 h-14 pl-12 pr-4 placeholder:text-slate-400 dark:placeholder:text-slate-500 text-base font-normal" 
                       placeholder="e.g. name@company.com" 
@@ -66,7 +81,7 @@ export default function SignupPage() {
                 <div className="flex flex-col gap-2">
                   <label className="text-slate-900 dark:text-white text-sm font-semibold leading-normal">Password</label>
                   <div className="relative">
-                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">lock</span>
+                    <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl" />
                     <input 
                       className="form-input flex w-full rounded-xl text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 h-14 pl-12 pr-12 placeholder:text-slate-400 dark:placeholder:text-slate-500 text-base font-normal" 
                       placeholder="Create a strong password" 
@@ -74,16 +89,16 @@ export default function SignupPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
-                    <span 
-                      className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl cursor-pointer hover:text-slate-600"
+                    <div 
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl cursor-pointer hover:text-slate-600"
                       onClick={() => setShowPassword(!showPassword)}
                     >
-                      {showPassword ? 'visibility_off' : 'visibility'}
-                    </span>
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </div>
                   </div>
                 </div>
 
-              
+                {/* Terms and Conditions */}
                 <div className="flex items-start gap-3 py-2">
                   <input 
                     className="mt-1 h-5 w-5 rounded border-slate-300 dark:border-slate-700 text-primary focus:ring-primary bg-slate-50 dark:bg-slate-800" 
@@ -105,7 +120,7 @@ export default function SignupPage() {
                   <span className="truncate">Get Started</span>
                 </button>
 
-                {/* Social */}
+               
                 <div className="flex items-center gap-4 my-4">
                   <div className="h-px grow bg-slate-200 dark:bg-slate-800"></div>
                   <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">or sign up with</span>
@@ -134,7 +149,14 @@ export default function SignupPage() {
             </div>
           </main>
 
-          
+          {/* Footer */}
+          <footer className="py-8 text-center px-4">
+            <p className="text-slate-500 dark:text-slate-400 text-sm">
+              © 2024 Donezo Inc. All rights reserved. 
+              <span className="mx-2">•</span>
+              Built for productivity by teams everywhere.
+            </p>
+          </footer>
         </div>
       </div>
     </div>
