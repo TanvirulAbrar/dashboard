@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaCheckCircle, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -15,11 +16,11 @@ export default function LoginPage() {
   return (
     <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
       <div className="layout-container flex h-full grow flex-col">
-        {/* Header */}
+      
         <header className="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 px-6 py-4 md:px-10">
           <div className="flex items-center gap-3">
             <div className="size-8 bg-primary rounded-lg flex items-center justify-center text-black">
-              <span className="material-symbols-outlined font-bold">check_circle</span>
+              <FaCheckCircle className="text-xl font-bold" />
             </div>
             <h2 className="text-slate-900 dark:text-white text-xl font-black leading-tight tracking-tight">Donezo</h2>
           </div>
@@ -32,7 +33,7 @@ export default function LoginPage() {
         {/* Main Content */}
         <main className="flex-1 flex items-center justify-center p-6">
           <div className="w-full max-w-[440px] flex flex-col gap-8">
-            {/* Welcome Text */}
+            
             <div className="flex flex-col gap-2 text-center md:text-left">
               <h1 className="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">Welcome Back</h1>
               <p className="text-slate-500 dark:text-slate-400 text-base">Efficiency is just one click away.</p>
@@ -72,14 +73,12 @@ export default function LoginPage() {
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
                     >
-                      <span className="material-symbols-outlined text-xl">
-                        {showPassword ? 'visibility_off' : 'visibility'}
-                      </span>
+                      {showPassword ? <FaEyeSlash className="text-xl" /> : <FaEye className="text-xl" />}
                     </button>
                   </div>
                 </div>
 
-                {/* Remember Me */}
+               
                 <div className="flex items-center gap-3 py-1">
                   <input 
                     className="form-checkbox h-5 w-5 rounded border-slate-300 dark:border-slate-700 bg-transparent text-primary focus:ring-0 focus:ring-offset-0 transition-all cursor-pointer" 
