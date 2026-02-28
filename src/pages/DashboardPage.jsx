@@ -18,27 +18,32 @@ const DashboardPage = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
-  const [datas, setDatas] = useState(null);
+  const [datas, setDatas] = useState([
+    ["overview", "/dashboard/overview"],
+    ["users", "/dashboard/users"],
+    ["analytics", "/dashboard/analytics"],
+    ["products", "/dashboard/products"],
+  ]);
 
   const images = [
     "https://i.ibb.co.com/7J4M9ZVs/1772260004343-1.jpg",
     "https://i.ibb.co.com/DPT8GWdc/20260228-131243.jpg",
   ];
 
-  useEffect(() => {
-    const getdata = async () => {
-      const res = await axiosSecure.get("");
-      const data = res.data?.endpoints;
-      const dataArray = Object.entries(data || {});
-      const finalData = dataArray?.filter(
-        (item) => item[0] !== "product" || item[0] !== "user",
-      );
-      // console.log(finalData);
-      setDatas(finalData);
-    };
+  // useEffect(() => {
+  //   const getdata = async () => {
+  //     const res = await axiosSecure.get("");
+  //     const data = res.data?.endpoints;
+  //     const dataArray = Object.entries(data || {});
+  //     const finalData = dataArray?.filter(
+  //       (item) => item[0] !== "product" || item[0] !== "user",
+  //     );
+  //     // console.log(finalData);
+  //     setDatas(finalData);
+  //   };
 
-    getdata();
-  }, []);
+  //   getdata();
+  // }, []);
 
   const handleLogout = () => {
     logout();
@@ -176,6 +181,69 @@ const DashboardPage = () => {
               <ul className="space-y-2">
                 {datas &&
                   datas.map(([key, value], i) => {
+                    const icons = {
+                      overview: (
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                          ></path>
+                        </svg>
+                      ),
+                      users: (
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                          ></path>
+                        </svg>
+                      ),
+                      analytics: (
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                          ></path>
+                        </svg>
+                      ),
+                      products: (
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                          ></path>
+                        </svg>
+                      ),
+                    };
+
                     return (
                       <motion.li
                         key={i}
@@ -188,116 +256,21 @@ const DashboardPage = () => {
                       >
                         <NavLink
                           to={value}
-                          className={
-                            "flex items-center gap-3  bg-gray-50 text-donezo-green font-semibold"
-                          }
+                          className="flex items-center gap-3 bg-gray-50 text-donezo-green font-semibold"
                         >
                           <div
-                            className={`flex items-center gap-2 px-1 w-1  rounded-r-lg py-5 text-donezo-green font-semibold bg-linear-to-r from-green-800 to-green-600`}
+                            className={`flex items-center gap-2 px-1 w-1 rounded-r-lg py-5 font-semibold ${
+                              datas[i] && value === window.location.pathname
+                                ? "bg-linear-to-r from-green-800 to-green-600"
+                                : "bg-transparent"
+                            }`}
                           ></div>
-                          <svg
-                            className="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                            ></path>
-                          </svg>
+                          {icons[key]}
                           {key}
                         </NavLink>
                       </motion.li>
                     );
                   })}
-                <motion.li className="flex items-center gap-3 p-2 bg-gray-50 text-donezo-green font-semibold rounded-xl border-l-4 border-donezo-green">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    ></path>
-                  </svg>
-                  <NavLink to="/dashboard/overview">alloverview</NavLink>
-                </motion.li>
-                <motion.li className="flex items-center justify-between p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
-                  <div className="flex items-center gap-3">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                      ></path>
-                    </svg>
-                    Tasks
-                  </div>
-                  <span className="text-[10px] bg-donezo-green-dark text-white px-1.5 py-0.5 rounded-md">
-                    12+
-                  </span>
-                </motion.li>
-                <motion.li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    ></path>
-                  </svg>
-                  Calendar
-                </motion.li>
-                <motion.li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    ></path>
-                  </svg>
-                  Analytics
-                </motion.li>
-                <motion.li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    ></path>
-                  </svg>
-                  Team
-                </motion.li>
               </ul>
             </div>
 
