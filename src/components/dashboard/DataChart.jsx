@@ -12,7 +12,7 @@ import {
 
 const DataChart = ({ data }) => {
   return (
-    <BarChart width={200} height={"100%"} data={data}>
+    <BarChart className=" " width={"100%"} height={150} data={data}>
       {/* <CartesianGrid stroke="#ccc" /> */}
       {/* <XAxis dataKey={"date"} />
       <YAxis /> */}

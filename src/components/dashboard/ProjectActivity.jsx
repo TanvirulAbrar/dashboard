@@ -33,9 +33,9 @@ const ProjectActivity = ({ scrollCardVariants, products, analyticsData }) => {
     return IconData[category] || IconData.default;
   };
   return (
-    <motion.section className="grid grid-cols-12 lg:grid-cols-12 gap-6 mb-8">
+    <motion.section className="grid   grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
       <motion.div
-        className="col-span-4 bg-gray-600 p-6 rounded-3xl border border-gray-100 lg:col-span-4"
+        className="col-span-1 md:col-span-2  p-6  rounded-3xl border border-gray-100 lg:col-span-6"
         variants={scrollCardVariants}
         initial="hidden"
         whileInView="visible"
@@ -47,7 +47,7 @@ const ProjectActivity = ({ scrollCardVariants, products, analyticsData }) => {
       </motion.div>
 
       <motion.div
-        className="col-span-4 bg-white p-6 rounded-3xl border border-gray-100 flex flex-col justify-between lg:col-span-4"
+        className="col-span-1 md:col-span-1  bg-white p-6 rounded-3xl border border-gray-100 flex flex-col justify-between lg:col-span-3"
         variants={scrollCardVariants}
         initial="hidden"
         whileInView="visible"
@@ -71,7 +71,7 @@ const ProjectActivity = ({ scrollCardVariants, products, analyticsData }) => {
       </motion.div>
 
       <motion.div
-        className="col-span-4 bg-white p-6 rounded-3xl border border-gray-100 lg:col-span-4"
+        className="col-span-1 md:col-span-1  bg-white p-6 rounded-3xl border border-gray-100 lg:col-span-3"
         variants={scrollCardVariants}
         initial="hidden"
         whileInView="visible"
