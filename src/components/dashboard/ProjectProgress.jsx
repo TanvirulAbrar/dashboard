@@ -125,7 +125,6 @@ export default function ProjectProgress() {
           />
         </svg>
 
-        {/* Center Text */}
         <motion.div
           className="absolute inset-0 flex flex-col items-center justify-center"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -151,7 +150,6 @@ export default function ProjectProgress() {
         </motion.div>
       </motion.div>
 
-      {/* Legend */}
       <motion.div
         className="flex gap-4 mt-4 text-xs text-gray-500"
         variants={legendVariants}

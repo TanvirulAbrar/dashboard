@@ -1,10 +1,9 @@
-/* ===== Glow Section ===== */
 .glow-section {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px;
-  background: #0b0f19; /* optional, can remove */
+  background: #0b0f19;
 }
 
 .glow-section .glow-card {
@@ -12,11 +11,10 @@
   width: 320px;
   height: 200px;
   border-radius: 16px;
-  padding: 2px; /* border thickness */
+  padding: 2px;
   overflow: hidden;
 }
 
-/* Rotating gradient border */
 .glow-section .glow-card::before {
   content: "";
   position: absolute;
@@ -26,7 +24,6 @@
   z-index: 0;
 }
 
-/* Blur glow for soft effect */
 .glow-section .glow-card::after {
   content: "";
   position: absolute;
@@ -38,7 +35,6 @@
   z-index: 0;
 }
 
-/* Inner content */
 .glow-section .glow-card .content {
   position: relative;
   background: #111827;
@@ -49,7 +45,6 @@
   z-index: 1;
 }
 
-/* Keyframes for rotation */
 @keyframes glow-rotate {
   0% {
     transform: rotate(0deg);

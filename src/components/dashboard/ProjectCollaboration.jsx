@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import ProjectProgress from "./ProjectProgress";
 
-const ProjectCollaboration = ({ scrollCardVariants }) => {
+const ProjectCollaboration = ({ scrollCardVariants, users }) => {
+  const image = "https://i.ibb.co.com/DPT8GWdc/20260228-131243.jpg";
   return (
     <motion.section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* Team Collaboration */}
@@ -10,6 +11,8 @@ const ProjectCollaboration = ({ scrollCardVariants }) => {
         variants={scrollCardVariants}
         initial="hidden"
         whileInView="visible"
+        whileHover={{ scale: 1.02, y: -5 }}
+        transition={{ duration: 0.3 }}
         viewport={{ once: false, amount: 0.3 }}
       >
         <div className="flex justify-between items-center mb-6">
@@ -20,107 +23,45 @@ const ProjectCollaboration = ({ scrollCardVariants }) => {
         </div>
         <div className="space-y-4">
           {/* Team Member 1 */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img
-                alt="Alexandra"
-                className="w-10 h-10 rounded-full"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC12i09MBm0YrpNLT5fpXBnpqq5XFBOUkCWvinFqfnNEM9ne5fRpUMCLTvf_eSFDPi5HFE7ZOdGw4BTih6rrtBMkrvEiftm2U3AuM5HU7hZ8614yN5SlRpp60PgYRffwwlfcMWYow0UsltcdiY0t9flZ87X8ByKBJP0tNa4ZRfM_wzCoJG56FMTwAXcTu8zHPafdfOEd9TBJ2fBu2w5bfUk0VdOXILdaOWCkDtisN1nu-mGfMuH2tQfK86sSDyeubrJNNHXAy3uChs"
-              />
-              <div>
-                <p className="text-xs font-bold text-gray-800">
-                  Alexandra Deff
-                </p>
-                <p className="text-[9px] text-gray-400">
-                  Working on{" "}
-                  <span className="text-gray-600">
-                    Github Project Repository
+          {users &&
+            users.map((user) => {
+              return (
+                <div className="flex min-md:h-8 items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <img
+                      alt="Alexandra"
+                      className="w-10 h-10 rounded-full"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBk7pc3a_pKvwfs8i7Rkl7NdUweS3Bqx2PaK1mNQUZvhmedJhmjMo5vyHL_6YJAGJOED8VIENJWCy55opY0wWchbKLMpKVUXDwDwNmZNtdDN_lpZmho7FaUNYRoHXVo_WGnbceQLEh5UuTrop3_Ta47KmMtqw3WWNzbNPoLD29S9b0AhqFdubfrG2wvPNK8ZaC2XhbahsyP4g9yo5-BGdob8eW2Th8hD7cisSDqe7DVJEdYm2Cm-JeQZKsuduMjx7pRkqJ52ra7U4"
+                    />
+                    <div>
+                      <p className="text-xs font-bold text-gray-800">
+                        {user.name}
+                      </p>
+                      <p className="text-[9px] text-gray-400">
+                        {user.email}{" "}
+                        <span className="text-gray-600">{user.joinDate}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-[8px] px-2 py-0.5 rounded-md bg-green-50 text-green-600 font-medium">
+                    {user.status}
                   </span>
-                </p>
-              </div>
-            </div>
-            <span className="text-[8px] px-2 py-0.5 rounded-md bg-green-50 text-green-600 font-medium">
-              Completed
-            </span>
-          </div>
-          {/* Team Member 2 */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img
-                alt="Edwin"
-                className="w-10 h-10 rounded-full"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuExxbZFN4sLm4sJi8vrDtnUJxkandvVONhtADA4kmszoeLtxuqfSE8V-Y757uYIUOFDVFdgnsq1w4QasgOFN2Ys_AhlyBVP4Hq5mo7S6ukH8zbXNwgBlyXBDMS94_2iVjemelbKPHkJZbJAkltRdDXl1_PNP7ai9y2rALV7nsO6W4h8fFy8oXM5tB7CHArSoSbS_qv3LMX57sjB2Yk0EzbMqpT4VsyAb2Dlz1nActa9x_InLLNbip9ipncpM1k_C9jh7pjd1vtT0"
-              />
-              <div>
-                <p className="text-xs font-bold text-gray-800">Edwin Adenike</p>
-                <p className="text-[9px] text-gray-400">
-                  Working on{" "}
-                  <span className="text-gray-600">
-                    Integrate User Authentication System
-                  </span>
-                </p>
-              </div>
-            </div>
-            <span className="text-[8px] px-2 py-0.5 rounded-md bg-orange-50 text-orange-600 font-medium">
-              In Progress
-            </span>
-          </div>
-          {/* Team Member 3 */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img
-                alt="Isaac"
-                className="w-10 h-10 rounded-full"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBk7pc3a_pKvwfs8i7Rkl7NdUweS3Bqx2PaK1mNQUZvhmedJhmjMo5vyHL_6YJAGJOED8VIENJWCy55opY0wWchbKLMpKVUXDwDwNmZNtdDN_lpZmho7FaUNYRoHXVo_WGnbceQLEh5UuTrop3_Ta47KmMtqw3WWNzbNPoLD29S9b0AhqFdubfrG2wvPNK8ZaC2XhbahsyP4g9yo5-BGdob8eW2Th8hD7cisSDqe7DVJEdYm2Cm-JeQZKsuduMjx7pRkqJ52ra7U4"
-              />
-              <div>
-                <p className="text-xs font-bold text-gray-800">
-                  Isaac Oluwatemilorun
-                </p>
-                <p className="text-[9px] text-gray-400">
-                  Working on{" "}
-                  <span className="text-gray-600">
-                    Develop Search and Filter Functionality
-                  </span>
-                </p>
-              </div>
-            </div>
-            <span className="text-[8px] px-2 py-0.5 rounded-md bg-red-50 text-red-400 font-medium">
-              Pending
-            </span>
-          </div>
-          {/* Team Member 4 */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img
-                alt="David"
-                className="w-10 h-10 rounded-full"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSUEWcAniU7VimsBJf-zeup4QX-KvqjFOBVa0pdCManx-e12MGEM7wKYyAME1t9NAoucR6mssIQD7JiTIpPfOIBcrVEum1bA3n5mKFp6qtfivYrrxQVwCnbpCPiOdzJGxBhkNh70slnpnrOdgKzzrSqngCf7LQCxYtdTxYA8Z7UJBVyif6mzxVGimjDctLTPWrRo9mJg3dwOYruvtjYI4c0HVNNqji6gdrRC-YCg_b45HsEQobXhotmAzNlTXnlA67AnWrYDicvf4"
-              />
-              <div>
-                <p className="text-xs font-bold text-gray-800">David Oshodi</p>
-                <p className="text-[9px] text-gray-400">
-                  Working on{" "}
-                  <span className="text-gray-600">
-                    Responsive Layout for Homepage
-                  </span>
-                </p>
-              </div>
-            </div>
-            <span className="text-[8px] px-2 py-0.5 rounded-md bg-orange-50 text-orange-600 font-medium">
-              In Progress
-            </span>
-          </div>
+                </div>
+              );
+            })}
         </div>
       </motion.div>
 
       <ProjectProgress />
 
       <motion.div
-        className="col-span-3 bg-black rounded-3xl p-6 relative overflow-hidden flex flex-col lg:col-span-3"
+        className="col-span-3 bg-cover bg-center rounded-3xl p-6 relative overflow-hidden flex flex-col lg:col-span-3"
         variants={scrollCardVariants}
+        style={{ backgroundImage: `url(${image})` }}
         initial="hidden"
         whileInView="visible"
+        whileHover={{ scale: 1.02, y: -5 }}
+        transition={{ duration: 0.3 }}
         viewport={{ once: false, amount: 0.3 }}
       >
         <h3 className="text-white text-sm font-semibold mb-8 z-10">

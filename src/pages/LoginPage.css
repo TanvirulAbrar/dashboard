@@ -1,0 +1,31 @@
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-container {
+  background-image:
+    linear-gradient(to bottom, rgba(5, 21, 8, 0.4), rgba(5, 21, 8, 0.8)),
+    url("https://lh3.googleusercontent.com/aida-public/AB6AXuBl6aGOtaNpfkQ1LSVw2HxLkjRKUiNK78SnM2hK6oC6PGzXCRc-xJY8lwv8mtNZymLo9CDVN3aVKfGhb725IquaEyIC97lIQdV1nOwuFs4XsEDcWACTP-ZIQtog1lv5UzAVQ_hRvWZDyxHfWTQxu6bNzvlKJdfIrq1Lvc3IcQNMeY9si5eAALwGitg2NS9V2ciMH8o_ZqGaANzqYWX1P26rH8J-mMhj11R1-hgG6zrINU2_nCJ0TfoHXHq1fAM0d7iEvo41PKTpMZE");
+  background-size: cover;
+  background-position: center;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(132, 204, 22, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(132, 204, 22, 0.7);
+}

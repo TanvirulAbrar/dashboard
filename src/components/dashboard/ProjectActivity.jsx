@@ -1,48 +1,49 @@
 import { motion } from "framer-motion";
-const ProjectActivity = ({ scrollCardVariants }) => {
+import DataChart from "./DataChart";
+// import DataChart from "../charts/DataChart";
+const ProjectActivity = ({ scrollCardVariants, products, analyticsData }) => {
+  const getIcon = (category) => {
+    const IconData = {
+      subscription: {
+        d: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
+        colors: "bg-green-50 text-green-600",
+      },
+      addon: {
+        d: "M3 10h18M12 3v18",
+        colors: "bg-orange-50 text-orange-600",
+      },
+      design: {
+        d: "M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z",
+        colors: "bg-pink-50 text-pink-600",
+      },
+      development: {
+        d: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
+        colors: "bg-blue-50 text-blue-600",
+      },
+      testing: {
+        d: "M9 12l2 2 4-4",
+        colors: "bg-yellow-50 text-yellow-600",
+      },
+      default: {
+        d: "M12 6v6l4 2",
+        colors: "bg-slate-50 text-slate-600",
+      },
+    };
+
+    return IconData[category] || IconData.default;
+  };
   return (
-    <motion.section className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+    <motion.section className="grid grid-cols-12 lg:grid-cols-12 gap-6 mb-8">
       <motion.div
-        className="col-span-4 bg-white p-6 rounded-3xl border border-gray-100 lg:col-span-4"
+        className="col-span-4 bg-gray-600 p-6 rounded-3xl border border-gray-100 lg:col-span-4"
         variants={scrollCardVariants}
         initial="hidden"
         whileInView="visible"
+        whileHover={{ scale: 1.02 }}
         viewport={{ once: false, amount: 0.3 }}
       >
         <h3 className="font-bold text-gray-800 mb-6">Project Analytics</h3>
-        <div className="flex items-end justify-between h-40 gap-2 mb-2">
-          <div className="flex flex-col items-center flex-1">
-            <div className="w-full bg-gray-50 border-2 border-dashed border-gray-200 rounded-full h-16"></div>
-            <span className="text-[10px] text-gray-400 mt-2">S</span>
-          </div>
-          <div className="flex flex-col items-center flex-1">
-            <div className="w-full bg-donezo-green-dark rounded-full h-24"></div>
-            <span className="text-[10px] text-gray-400 mt-2">M</span>
-          </div>
-          <div className="flex flex-col items-center flex-1 relative">
-            <div className="absolute -top-6 bg-donezo-green-light/40 text-[8px] font-bold px-1 rounded">
-              74%
-            </div>
-            <div className="w-full bg-donezo-green-light rounded-full h-20"></div>
-            <span className="text-[10px] text-gray-400 mt-2">T</span>
-          </div>
-          <div className="flex flex-col items-center flex-1">
-            <div className="w-full bg-donezo-green-dark rounded-full h-32"></div>
-            <span className="text-[10px] text-gray-400 mt-2">W</span>
-          </div>
-          <div className="flex flex-col items-center flex-1">
-            <div className="w-full bg-gray-50 border-2 border-dashed border-gray-200 rounded-full h-24"></div>
-            <span className="text-[10px] text-gray-400 mt-2">T</span>
-          </div>
-          <div className="flex flex-col items-center flex-1">
-            <div className="w-full bg-gray-50 border-2 border-dashed border-gray-200 rounded-full h-16"></div>
-            <span className="text-[10px] text-gray-400 mt-2">F</span>
-          </div>
-          <div className="flex flex-col items-center flex-1">
-            <div className="w-full bg-gray-50 border-2 border-dashed border-gray-200 rounded-full h-12"></div>
-            <span className="text-[10px] text-gray-400 mt-2">S</span>
-          </div>
-        </div>
+        <DataChart data={analyticsData} />
       </motion.div>
 
       <motion.div
@@ -51,6 +52,8 @@ const ProjectActivity = ({ scrollCardVariants }) => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.3 }}
+        whileHover={{ scale: 1.02, y: -5 }}
+        transition={{ duration: 0.3 }}
       >
         <h3 className="font-bold text-gray-800 mb-4">Reminders</h3>
         <div>
@@ -72,109 +75,57 @@ const ProjectActivity = ({ scrollCardVariants }) => {
         variants={scrollCardVariants}
         initial="hidden"
         whileInView="visible"
+        whileHover={{ scale: 1.02 }}
         viewport={{ once: false, amount: 0.3 }}
       >
         <div className="flex justify-between items-center mb-6">
-          <h3 className="font-bold text-gray-800">Project</h3>
+          <h3 className="font-bold text-gray-800">Product</h3>
           <button className="text-xs border border-gray-200 px-3 py-1 rounded-full text-gray-500 hover:bg-gray-50">
             + New
           </button>
         </div>
         <ul className="space-y-4">
-          <li className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-blue-50 text-blue-600 rounded flex items-center justify-center">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-800">
-                Develop API Endpoints
-              </p>
-              <p className="text-[9px] text-gray-400">Due date: Nov 25, 2024</p>
-            </div>
-          </li>
-          <li className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-teal-50 text-teal-600 rounded flex items-center justify-center">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-800">Onboarding Flow</p>
-              <p className="text-[9px] text-gray-400">Due date: Nov 28, 2024</p>
-            </div>
-          </li>
-          <li className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-orange-50 text-orange-600 rounded flex items-center justify-center">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                ></path>
-                <path
-                  d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-800">Build Dashboard</p>
-              <p className="text-[9px] text-gray-400">Due date: Nov 30, 2024</p>
-            </div>
-          </li>
-          <li className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-yellow-50 text-yellow-600 rounded flex items-center justify-center">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-800">
-                Optimize Page Load
-              </p>
-              <p className="text-[9px] text-gray-400">Due date: Dec 5, 2024</p>
-            </div>
-          </li>
+          {products &&
+            products.map((product) => {
+              const icon = getIcon(product.category);
+              const revenue = product.price * product.sales;
+
+              return (
+                <li className="flex items-center gap-3 bg-white rounded-xl hover:shadow-md transition">
+                  <div
+                    className={`w-8 h-8 rounded-lg flex items-center justify-center ${icon.colors}`}
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d={icon.d}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.8"
+                      />
+                    </svg>
+                  </div>
+
+                  <div className="flex-1">
+                    <p className="text-[10px] flex justify-between font-semibold text-gray-800">
+                      <div className="line-clamp-1">{product.name}</div>
+                      <div
+                        className={`${icon.colors} text-[8px] font-normal px-[6px] rounded-full`}
+                      >
+                        {product.category}
+                      </div>
+                    </p>
+                    <p className="text-[10px] text-gray-400 ">
+                      ${product.price} • Sales: {product.sales}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
         </ul>
       </motion.div>
     </motion.section>

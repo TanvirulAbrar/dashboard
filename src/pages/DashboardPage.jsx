@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { use, useEffect, useState } from "react";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
@@ -7,11 +7,38 @@ import ProjectProgress from "../components/dashboard/ProjectProgress";
 import Overview from "../components/dashboard/Overview";
 import ProjectActivity from "../components/dashboard/ProjectActivity";
 import ProjectCollaboration from "../components/dashboard/ProjectCollaboration";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import AllOverview from "./AllOverview";
+import DataChart from "../components/dashboard/DataChart";
 
 const DashboardPage = () => {
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const [searchQuery, setSearchQuery] = useState("");
   const { logout } = useAuth();
   const navigate = useNavigate();
+
+  const [datas, setDatas] = useState(null);
+
+  const images = [
+    "https://i.ibb.co.com/7J4M9ZVs/1772260004343-1.jpg",
+    "https://i.ibb.co.com/DPT8GWdc/20260228-131243.jpg",
+  ];
+
+  useEffect(() => {
+    const getdata = async () => {
+      const res = await axiosSecure.get("");
+      const data = res.data?.endpoints;
+      const dataArray = Object.entries(data || {});
+      const finalData = dataArray?.filter(
+        (item) => item[0] !== "product" || item[0] !== "user",
+      );
+      // console.log(finalData);
+      setDatas(finalData);
+    };
+
+    getdata();
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -90,12 +117,12 @@ const DashboardPage = () => {
   };
 
   const scrollCardVariants = {
-    hidden: { y: 50, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.4,
         ease: "easeOut",
       },
     },
@@ -147,7 +174,37 @@ const DashboardPage = () => {
                 Menu
               </p>
               <ul className="space-y-2">
-                <li className="flex items-center gap-3 p-2 bg-gray-50 text-donezo-green font-semibold rounded-xl border-l-4 border-donezo-green">
+                {datas &&
+                  datas.map(([key, value], i) => {
+                    return (
+                      <motion.li
+                        key={i}
+                        className="flex items-center gap-3 p-2 bg-gray-50 text-donezo-green font-semibold 
+                        rounded-xl border-l-4 border-donezo-green"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        whileHover={{ scale: 1.05, color: "#ff0055" }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                      >
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                          ></path>
+                        </svg>
+                        {key}
+                      </motion.li>
+                    );
+                  })}
+                <motion.li className="flex items-center gap-3 p-2 bg-gray-50 text-donezo-green font-semibold rounded-xl border-l-4 border-donezo-green">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -161,9 +218,9 @@ const DashboardPage = () => {
                       strokeWidth="2"
                     ></path>
                   </svg>
-                  Dashboard
-                </li>
-                <li className="flex items-center justify-between p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
+                  <NavLink to="/dashboard/overview">alloverview</NavLink>
+                </motion.li>
+                <motion.li className="flex items-center justify-between p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
                   <div className="flex items-center gap-3">
                     <svg
                       className="w-5 h-5"
@@ -183,8 +240,8 @@ const DashboardPage = () => {
                   <span className="text-[10px] bg-donezo-green-dark text-white px-1.5 py-0.5 rounded-md">
                     12+
                   </span>
-                </li>
-                <li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
+                </motion.li>
+                <motion.li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -199,8 +256,8 @@ const DashboardPage = () => {
                     ></path>
                   </svg>
                   Calendar
-                </li>
-                <li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
+                </motion.li>
+                <motion.li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -215,8 +272,8 @@ const DashboardPage = () => {
                     ></path>
                   </svg>
                   Analytics
-                </li>
-                <li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
+                </motion.li>
+                <motion.li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -231,7 +288,7 @@ const DashboardPage = () => {
                     ></path>
                   </svg>
                   Team
-                </li>
+                </motion.li>
               </ul>
             </div>
 
@@ -240,7 +297,7 @@ const DashboardPage = () => {
                 General
               </p>
               <ul className="space-y-2">
-                <li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
+                <motion.li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -261,8 +318,8 @@ const DashboardPage = () => {
                     ></path>
                   </svg>
                   Settings
-                </li>
-                <li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
+                </motion.li>
+                <motion.li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -277,8 +334,8 @@ const DashboardPage = () => {
                     ></path>
                   </svg>
                   Help
-                </li>
-                <li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
+                </motion.li>
+                <motion.li className="flex items-center gap-3 p-2 text-gray-500 hover:bg-gray-50 rounded-xl cursor-pointer">
                   <button
                     onClick={handleLogout}
                     className="flex items-center gap-3 text-gray-500 hover:bg-gray-50 rounded-xl p-2"
@@ -298,13 +355,22 @@ const DashboardPage = () => {
                     </svg>
                     Logout
                   </button>
-                </li>
+                </motion.li>
               </ul>
             </div>
           </nav>
 
           {/* App Download Card */}
-          <div className="mt-auto bg-black rounded-2xl p-4 text-white relative overflow-hidden">
+          <motion.div
+            className={`mt-auto bg-cover bg-center rounded-2xl p-4 text-white relative overflow-hidden`}
+            style={{ backgroundImage: `url(${images[1]})` }}
+            variants={scrollCardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            transition={{ duration: 0.3 }}
+          >
             <div className="z-10 relative">
               <div className="bg-gray-800 w-8 h-8 rounded-lg flex items-center justify-center mb-2">
                 <svg className="w-5 h-5" fill="white" viewBox="0 0 24 24">
@@ -317,13 +383,17 @@ const DashboardPage = () => {
               <p className="text-[10px] text-gray-400 mb-4">
                 Get easy in another way
               </p>
-              <button className="w-full bg-donezo-green-dark py-2 rounded-xl text-xs font-bold hover:bg-opacity-90 transition">
+              <motion.button
+                className="w-full bg-donezo-green-dark py-2 rounded-xl text-xs font-bold hover:bg-opacity-90 transition"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
                 Download
-              </button>
+              </motion.button>
             </div>
             {/* Decorative Circle */}
             <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-white opacity-10 rounded-full"></div>
-          </div>
+          </motion.div>
         </motion.aside>
 
         <motion.main
@@ -405,10 +475,10 @@ const DashboardPage = () => {
               <div className="flex items-center gap-3 pl-6 border-l border-gray-100">
                 <div className="text-right">
                   <p className="text-sm font-bold text-gray-800 leading-tight">
-                    Totok Michael
+                    {user?.name || "User"}
                   </p>
                   <p className="text-[10px] text-gray-400">
-                    tmichael20@mail.com
+                    {user?.email || "user@example.com"}
                   </p>
                 </div>
                 <img
@@ -430,7 +500,11 @@ const DashboardPage = () => {
               </p>
             </div>
             <div className="flex gap-3">
-              <button className="bg-donezo-green-dark text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-opacity-90 transition">
+              <motion.button
+                className="bg-donezo-green-dark text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-opacity-90 transition"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <svg
                   className="w-4 h-4"
                   fill="none"
@@ -445,15 +519,18 @@ const DashboardPage = () => {
                   ></path>
                 </svg>
                 Add Project
-              </button>
-              <button className="border border-gray-200 text-gray-600 px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition">
+              </motion.button>
+              <motion.button
+                className="border border-gray-200 text-gray-600 px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 Import Data
-              </button>
+              </motion.button>
             </div>
           </section>
-          <Overview scrollCardVariants={scrollCardVariants}></Overview>
-          <ProjectActivity scrollCardVariants={scrollCardVariants} />
-          <ProjectCollaboration scrollCardVariants={scrollCardVariants} />
+          <Outlet />
+          {location.pathname === "/dashboard" && <AllOverview />}
         </motion.main>
       </div>
     </motion.div>
